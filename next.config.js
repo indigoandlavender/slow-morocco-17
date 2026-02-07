@@ -251,6 +251,29 @@ const nextConfig = {
       { source: '/the-table-the-vine-ii-the-northern-cellars', destination: '/journeys', permanent: true },
       { source: '/traditional-medicine-healing-arts', destination: '/journeys', permanent: true },
       { source: '/wild-morocco-from-forests-to-the-atlantic', destination: '/journeys', permanent: true },
+
+      // ============================================
+      // GSC 404 FIXES - Feb 2026
+      // ============================================
+      { source: '/cities', destination: '/places', permanent: true },
+      { source: '/the-atlantic-ocean', destination: '/journeys', permanent: true },
+      { source: '/the-atlantic-ocean-1', destination: '/journeys', permanent: true },
+      { source: '/the-sahara', destination: '/journeys', permanent: true },
+      { source: '/the-slow-way-2', destination: '/manifesto', permanent: true },
+      { source: '/accessibility-comfort', destination: '/faq', permanent: true },
+      { source: '/accessibility-commitment', destination: '/faq', permanent: true },
+      { source: '/behind-the-scenes', destination: '/about', permanent: true },
+      { source: '/coastal-havens', destination: '/journeys', permanent: true },
+      { source: '/contact-us', destination: '/contact', permanent: true },
+      { source: '/destinations', destination: '/places', permanent: true },
+      { source: '/getting-started', destination: '/plan-your-trip', permanent: true },
+      { source: '/guest-experiences', destination: '/stories', permanent: true },
+      { source: '/our-commitment', destination: '/manifesto', permanent: true },
+      { source: '/payments-refunds', destination: '/cancellation-policy', permanent: true },
+      { source: '/travel-notes', destination: '/stories', permanent: true },
+      { source: '/traveling-with-a-companion', destination: '/plan-your-trip', permanent: true },
+      { source: '/what-we-do', destination: '/journeys', permanent: true },
+      { source: '/who-we-are', destination: '/about', permanent: true },
     ];
   },
 };
