@@ -3,6 +3,19 @@ import { getJourneys, getStories, getPlaces, getDayTrips } from '@/lib/supabase'
 
 const BASE_URL = 'https://www.slowmorocco.com'
 
+/**
+ * Ensure a slug is safe for use in XML sitemap URLs.
+ * URL-encodes characters that break XML parsing (especially &).
+ * The encoded URL is valid in both XML and browser navigation.
+ */
+function safeSitemapUrl(base: string, prefix: string, slug: string): string {
+  // Encode the slug portion to handle & and other special chars
+  // encodeURIComponent turns & into %26 which is XML-safe
+  const encodedSlug = encodeURIComponent(slug)
+    .replace(/%2F/g, '/')  // preserve any intentional slashes
+  return `${base}${prefix}/${encodedSlug}`
+}
+
 // Static pages with their priorities
 const STATIC_PAGES = [
   { path: '', priority: 1, changeFrequency: 'weekly' as const },
@@ -38,7 +51,7 @@ async function getDynamicPages() {
     journeys.forEach((journey) => {
       if (journey.slug) {
         dynamicPages.push({
-          url: `${BASE_URL}/journeys/${journey.slug}`,
+          url: safeSitemapUrl(BASE_URL, '/journeys', journey.slug),
           lastModified: new Date(),
           changeFrequency: 'weekly',
           priority: 0.8,
@@ -54,7 +67,7 @@ async function getDynamicPages() {
     stories.forEach((story) => {
       if (story.slug) {
         dynamicPages.push({
-          url: `${BASE_URL}/story/${story.slug}`,
+          url: safeSitemapUrl(BASE_URL, '/story', story.slug),
           lastModified: new Date(),
           changeFrequency: 'monthly',
           priority: 0.7,
@@ -70,7 +83,7 @@ async function getDynamicPages() {
     places.forEach((place) => {
       if (place.slug) {
         dynamicPages.push({
-          url: `${BASE_URL}/places/${place.slug}`,
+          url: safeSitemapUrl(BASE_URL, '/places', place.slug),
           lastModified: new Date(),
           changeFrequency: 'monthly',
           priority: 0.6,
@@ -86,7 +99,7 @@ async function getDynamicPages() {
     dayTrips.forEach((trip) => {
       if (trip.slug) {
         dynamicPages.push({
-          url: `${BASE_URL}/day-trips/${trip.slug}`,
+          url: safeSitemapUrl(BASE_URL, '/day-trips', trip.slug),
           lastModified: new Date(),
           changeFrequency: 'weekly',
           priority: 0.7,
