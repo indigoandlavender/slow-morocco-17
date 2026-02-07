@@ -22,6 +22,9 @@ interface Story {
   the_facts?: string;
   tags?: string;
   region?: string;
+  country?: string;
+  era?: string;
+  theme?: string;
 }
 
 async function getStoryData(slug: string) {
@@ -46,6 +49,9 @@ async function getStoryData(slug: string) {
     tags: storyData.tags ?? undefined,
     the_facts: storyData.the_facts ?? undefined,
     region: storyData.region ?? undefined,
+    country: storyData.country ?? undefined,
+    era: storyData.era ?? undefined,
+    theme: storyData.theme ?? undefined,
   };
 
   return story;

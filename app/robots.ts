@@ -9,34 +9,38 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/admin/', '/client/', '/proposal/'],
       },
-      // AI Search Crawlers - explicitly allowed
+      // AI Search Crawlers - full access to content + knowledge APIs
       {
         userAgent: 'OAI-SearchBot',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       {
         userAgent: 'GPTBot',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       {
         userAgent: 'ChatGPT-User',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       {
         userAgent: 'anthropic-ai',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       {
         userAgent: 'Claude-Web',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       {
         userAgent: 'PerplexityBot',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       {
         userAgent: 'Bingbot',
-        allow: ['/', '/api/glossary'],
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
+      },
+      {
+        userAgent: 'Google-Extended',
+        allow: ['/', '/api/glossary', '/api/knowledge/'],
       },
       // Default rules for all other crawlers
       {

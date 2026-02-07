@@ -24,6 +24,9 @@ interface Story {
   the_facts?: string;
   tags?: string;
   region?: string;
+  country?: string;
+  era?: string;
+  theme?: string;
 }
 
 interface StoryImage {
@@ -141,8 +144,10 @@ export default function StoryDetailContent({
       url: `https://www.slowmorocco.com/story/${slug}`,
     },
     articleSection: story.category,
-    articleBody: story.body ? story.body.substring(0, 500) + "..." : undefined,
+    articleBody: story.body ? story.body.replace(/<[^>]*>/g, '').replace(/!\[.*?\]\(.*?\)/g, '').replace(/!!\[.*?\]\(.*?\)/g, '').substring(0, 3000) + (story.body.length > 3000 ? "..." : "") : undefined,
+    wordCount: story.body ? story.body.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length : undefined,
     keywords: tags.join(", "),
+    ...(story.era && { temporalCoverage: story.era }),
     about: [
       ...(story.region ? [{
         "@type": "Place",
@@ -155,6 +160,13 @@ export default function StoryDetailContent({
         description: `Cultural element of Moroccan heritage`,
       })),
     ],
+    ...(story.the_facts && {
+      hasPart: {
+        "@type": "WebPageElement",
+        name: "Key Facts",
+        text: story.the_facts,
+      },
+    }),
     citation: trustClusterCitations,
     isPartOf: {
       "@type": "WebSite",
@@ -162,6 +174,10 @@ export default function StoryDetailContent({
       name: "Slow Morocco",
       url: "https://www.slowmorocco.com",
       description: "Cultural essays and stories exploring Morocco's history, craft, and traditions.",
+    },
+    potentialAction: {
+      "@type": "ReadAction",
+      target: `https://www.slowmorocco.com/story/${slug}`,
     },
     isAccessibleForFree: true,
     license: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
