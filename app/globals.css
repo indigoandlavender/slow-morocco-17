@@ -385,3 +385,13 @@ button:focus {
 .glossary-link:hover {
   text-decoration-color: hsl(var(--foreground) / 0.6);
 }
+
+.derb-link {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-color: hsl(var(--foreground) / 0.25);
+  text-underline-offset: 3px;
+}
+.derb-link:hover {
+  text-decoration-color: hsl(var(--foreground) / 0.5);
+}

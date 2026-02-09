@@ -44,7 +44,7 @@ export default function FAQPage() {
     {
       question: "Is Morocco safe for travelers?",
       answer:
-        "Yes, Morocco is generally very safe for travelers. We work with experienced guides who know the country well and prioritize your safety and comfort throughout your journey.",
+        "Yes, Morocco is generally very safe for travelers. We work with experienced guides who know the country well and prioritize your safety and comfort throughout your journey. For practical questions about navigating the medina, taxis, and local customs, see our companion site Derb — a city guide for Morocco's urban realities.",
     },
     {
       question: "What's your cancellation policy?",
@@ -110,7 +110,7 @@ export default function FAQPage() {
               Don't See Your Question?
             </h2>
             <p className="text-foreground/50 mb-8">
-              We're happy to answer any questions you have.
+              We're happy to answer any questions you have. For everyday questions about Morocco — taxis, tipping, what to wear, Ramadan, safety — visit <a href="https://derb.so" className="underline hover:text-white/80 transition-colors">Derb</a>, our city guide.
             </p>
             <a 
               href="/contact" 
