@@ -18,8 +18,13 @@ function linkAllTerms(text: string): React.ReactNode {
     return linkGlossaryTermsText(derbResult);
   }
   
+  // If derb linker returned null/undefined, fallback to glossary
+  if (!derbResult || !React.isValidElement(derbResult)) {
+    return linkGlossaryTermsText(text);
+  }
+
   // If derb linker returned fragments, apply glossary linker to string parts only
-  const children = React.Children.toArray(derbResult.props.children);
+  const children = React.Children.toArray((derbResult as React.ReactElement).props.children);
   return (
     <>
       {children.map((child, i) => {
