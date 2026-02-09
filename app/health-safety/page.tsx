@@ -110,6 +110,9 @@ export default function HealthSafetyPage() {
                   <p className="font-medium">+212 524 38 46 01</p>
                 </div>
               </div>
+              <p className="text-foreground/40 text-sm mt-4">
+                For a full list of emergency contacts and details on Morocco's tourist police, see <a href="https://derb.so/questions/what-is-the-police-touristique" className="underline hover:text-foreground/60 transition-colors">Derb — What is the police touristique?</a>
+              </p>
             </div>
           </section>
 
