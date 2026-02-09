@@ -1,9 +1,35 @@
 'use client';
 
+import React from 'react';
 import { linkGlossaryTermsText } from '@/lib/glossary-linker';
+import { linkDerbTermsText } from '@/lib/derb-linker';
 
 interface StoryBodyProps {
   content: string;
+}
+
+// Combined linker: first applies derb.so links, then glossary links to remaining text
+function linkAllTerms(text: string): React.ReactNode {
+  // Get derb-linked result (React nodes)
+  const derbResult = linkDerbTermsText(text);
+  
+  // If derb linker didn't find anything, just use glossary linker
+  if (typeof derbResult === 'string') {
+    return linkGlossaryTermsText(derbResult);
+  }
+  
+  // If derb linker returned fragments, apply glossary linker to string parts only
+  const children = React.Children.toArray(derbResult.props.children);
+  return (
+    <>
+      {children.map((child, i) => {
+        if (typeof child === 'string') {
+          return <React.Fragment key={i}>{linkGlossaryTermsText(child)}</React.Fragment>;
+        }
+        return child; // Already a link element from derb linker
+      })}
+    </>
+  );
 }
 
 export default function StoryBody({ content }: StoryBodyProps) {
@@ -23,7 +49,7 @@ export default function StoryBody({ content }: StoryBodyProps) {
               key={index}
               className="border-l-2 border-foreground/20 pl-6 my-8 text-xl italic text-foreground/70"
             >
-              {linkGlossaryTermsText(quoteText)}
+              {linkAllTerms(quoteText)}
             </blockquote>
           );
         }
@@ -47,7 +73,7 @@ export default function StoryBody({ content }: StoryBodyProps) {
             key={index}
             className="text-foreground/70 leading-relaxed mb-6"
           >
-            {linkGlossaryTermsText(paragraph)}
+            {linkAllTerms(paragraph)}
           </p>
         );
       })}
